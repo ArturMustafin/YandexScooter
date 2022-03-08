@@ -14,9 +14,7 @@ public class MainPage extends BasePage {
     private final By cookieButton = By.id("rcc-confirm-button");
     private final By orderButtonTop = By.cssSelector("[class='Button_Button__ra12g']");
     private final By orderButtonMiddle = By.cssSelector(".Button_Middle__1CSJM");
-    // MAP  использовал для ParameterizedTest, выбор элемента происходит в зависимости от вопроса.
-    // Правильно реализовал или есть проще и лучше способ?
-    private final Map<Integer, String> FIELD_QUESTIONS = Map.of(
+    private final Map<Integer, String> fieldQuestions = Map.of(
             1, ".//div[1][@class='accordion__item']",
             2, ".//div[2][@class='accordion__item']",
             3, ".//div[3][@class='accordion__item']",
@@ -26,7 +24,7 @@ public class MainPage extends BasePage {
             7, ".//div[7][@class='accordion__item']",
             8, ".//div[8][@class='accordion__item']"
     );
-    private final Map<Integer, String> FIELD_ANSWER = Map.of(
+    private final Map<Integer, String> fieldAnswer = Map.of(
             1, ".//div[@id='accordion__panel-0']/p",
             2, ".//div[@id='accordion__panel-1']/p",
             3, ".//div[@id='accordion__panel-2']/p",
@@ -36,7 +34,6 @@ public class MainPage extends BasePage {
             7, ".//div[@id='accordion__panel-6']/p",
             8, ".//div[@id='accordion__panel-7']/p"
     );
-
 
     public MainPage(String url) {
         open(url);
@@ -49,12 +46,12 @@ public class MainPage extends BasePage {
         if (numberQuestion == 1) {
             clickButton(cookieButton);
         }
-        clickButton(FIELD_QUESTIONS.get(numberQuestion));
+        clickButton(fieldQuestions.get(numberQuestion));
         return this;
     }
 
     public String getTextAnswer(int numberQuestion) {
-        return getText(FIELD_ANSWER.get(numberQuestion));
+        return getText(fieldAnswer.get(numberQuestion));
     }
 
     public void clickOrder(String orderButton) {

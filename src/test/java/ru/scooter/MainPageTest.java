@@ -13,7 +13,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class OneTest extends BaseTest {
+public class MainPageTest extends BaseTest {
     private final static String URL_HOME = "https://qa-scooter.praktikum-services.ru/";
     private static final Map<Integer, String> ANSWER_TO_QUESTION = Map.of(
             1, "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
@@ -25,19 +25,19 @@ public class OneTest extends BaseTest {
             7, "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
             8, "Да, обязательно. Всем самокатов! И Москве, и Московской области."
     );
-    // Faker генератор случайных данных
-    private final String DATE_NOW = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime());
-    private final Faker faker = new Faker(new Locale("ru"));
-    private final String NAME = faker.name().firstName();
-    private final String SURNAME = faker.name().lastName();
-    private final String ADDRESS = faker.address().streetAddress();
-    private final String PHONE = faker.phoneNumber().subscriberNumber(11);
-    private final String UNDERGROUND = "Люблино";
+    private final String dateNow = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime());
+    private final static String UNDERGROUND = "Люблино";
 
-    /**
-     * В задание требовалось использовать junit заменил на junit.jupiter
-     * тут присутствует @ParameterizedTest
-     */
+    // Faker генератор случайных данных
+    //=================================
+    // нужно ли сдесь делать константы?
+    private final Faker faker = new Faker(new Locale("ru"));
+    private final String name = faker.name().firstName();
+    private final String surname = faker.name().lastName();
+    private final String address = faker.address().streetAddress();
+    private final String phone = faker.phoneNumber().subscriberNumber(11);
+    //=================================
+
     @ParameterizedTest(name = "{0} - question")
     @ValueSource(ints = {
             1, 2, 3, 4, 5, 6, 7, 8
@@ -47,9 +47,8 @@ public class OneTest extends BaseTest {
         MainPage mainPage = new MainPage(URL_HOME)
                 .clickQuestion(numberQuestion);
 
-        //сложный на мой взгляд ассерт
-        Assertions.assertTrue(/*получил с ui ответ на вопрос*/mainPage.getTextAnswer(numberQuestion)
-                .contains(/*и проверяю со своей константой*/ANSWER_TO_QUESTION.get(numberQuestion)));
+        Assertions.assertTrue(mainPage.getTextAnswer(numberQuestion)
+                .contains(ANSWER_TO_QUESTION.get(numberQuestion)));
     }
 
 
@@ -63,7 +62,7 @@ public class OneTest extends BaseTest {
                 .clickOrder(orderButton);
 
         OrderPage orderPage = new OrderPage()
-                .makeOrderWithMandatoryField(NAME, SURNAME, ADDRESS, PHONE, UNDERGROUND, DATE_NOW);
+                .makeOrderWithMandatoryField(name, surname, address, phone, UNDERGROUND, dateNow);
         String statusOrder = orderPage.getTextStatus();
 
         Assertions.assertEquals("Заказ оформлен", statusOrder);

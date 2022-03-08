@@ -7,18 +7,18 @@ import org.openqa.selenium.Keys;
  * Страница сайта "Заказа"
  */
 public class OrderPage extends BasePage {
-    private final By INPUT_NAME = By.xpath(".//input[@placeholder='* Имя']");
-    private final By INPUT_SURNAME = By.xpath(".//input[@placeholder='* Фамилия']");
-    private final By INPUT_ADDRESS = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
-    private final By INPUT_PHONE = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
-    private final By INPUT_UNDERGROUND = By.xpath(".//input[@placeholder='* Станция метро']");
-    private final By INPUT_DATE = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
-    private final By PERIOD = By.cssSelector(".Dropdown-control");
-    private final By WEEK = By.cssSelector(".Dropdown-option");
-    private final By BUTTON_NEXT = By.cssSelector(".Button_Middle__1CSJM");
-    private final By BUTTON_ORDER = By.cssSelector("[class='Button_Button__ra12g Button_Middle__1CSJM']");
-    private final By BUTTON_CONFIRM = By.xpath(".//div[@class='Order_Modal__YZ-d3']//button[text()='Да']");
-    private final By TEXT_STATUS_ORDER = By.xpath(".//div[text()='Заказ оформлен']");
+    private final By inputName = By.xpath(".//input[@placeholder='* Имя']");
+    private final By inputSurname = By.xpath(".//input[@placeholder='* Фамилия']");
+    private final By inputAddress = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
+    private final By inputPhone = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
+    private final By inputUnderground = By.xpath(".//input[@placeholder='* Станция метро']");
+    private final By inputDate = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    private final By period = By.cssSelector(".Dropdown-control");
+    private final By week = By.cssSelector(".Dropdown-option");
+    private final By buttonNext = By.cssSelector(".Button_Middle__1CSJM");
+    private final By buttonOrder = By.cssSelector("[class='Button_Button__ra12g Button_Middle__1CSJM']");
+    private final By buttonConfirm = By.xpath(".//div[@class='Order_Modal__YZ-d3']//button[text()='Да']");
+    private final By textStatusOrder = By.xpath(".//div[text()='Заказ оформлен']");
 
     public OrderPage makeOrderWithMandatoryField(String name, String surname, String address,
                                                  String phone, String underground, String dateNow) {
@@ -40,51 +40,51 @@ public class OrderPage extends BasePage {
     }
 
     private void setNameInField(String name) {
-        setField(INPUT_NAME, name);
+        setField(inputName, name);
     }
 
     private void setSurnameInField(String surname) {
-        setField(INPUT_SURNAME, surname);
+        setField(inputSurname, surname);
     }
 
     private void setAddressInField(String address) {
-        setField(INPUT_ADDRESS, address);
+        setField(inputAddress, address);
     }
 
     private void setPhoneInField(String phone) {
-        setField(INPUT_PHONE, phone);
+        setField(inputPhone, phone);
     }
 
     private void setUndergroundInField(String underground) {
-        setField(INPUT_UNDERGROUND, underground, Keys.ARROW_DOWN, Keys.ENTER);
+        setField(inputUnderground, underground, Keys.ARROW_DOWN, Keys.ENTER);
     }
 
     private void clickNextButton() {
-        clickButton(BUTTON_NEXT);
+        clickButton(buttonNext);
     }
 
     private void setDateNowInField(String dateNow) {
-        setField(INPUT_DATE, dateNow, Keys.ENTER);
+        setField(inputDate, dateNow, Keys.ENTER);
     }
 
     private void clickRentalPeriod() {
-        clickButton(PERIOD);
+        clickButton(period);
     }
 
     private void clickCountDay() {
-        clickButton(WEEK);
+        clickButton(week);
     }
 
     private void clickButtonOrder() {
-        clickButton(BUTTON_ORDER);
+        clickButton(buttonOrder);
     }
 
     // тут баг в хроме
     private void clickButtonConfirm() {
-        clickButton(BUTTON_CONFIRM);
+        clickButton(buttonConfirm);
     }
 
     public String getTextStatus() {
-        return getText(TEXT_STATUS_ORDER);
+        return getText(textStatusOrder);
     }
 }

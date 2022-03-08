@@ -5,11 +5,6 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 
-/**
- * Сделал  abstract class BasePage т.к. в классах 'MainPage' и 'OrderPage'
- * есть одинаковые повторяющие методы click, getText
- * и для более удобного читания кода
- */
 public abstract class BasePage {
 
     protected void clickButton(String element) {
