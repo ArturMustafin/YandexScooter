@@ -47,14 +47,8 @@ public class MainPage extends BasePage {
             clickButton(buttonCookie);
         }
     }
-    public MainPage clickQuestion(int numberQuestion) {
-        /**
-         *
 
-        if (numberQuestion == 1) {
-            clickButton(cookieButton);
-        }
-         */
+    public MainPage clickQuestion(int numberQuestion) {
         clickButton(fieldQuestions.get(numberQuestion));
         return this;
     }
@@ -64,16 +58,11 @@ public class MainPage extends BasePage {
         return this;
     }
 
-
-
     public String getTextAnswer(int numberQuestion) {
         return getText(fieldAnswer.get(numberQuestion));
     }
 
     public void clickOrder(String orderButton) {
-        if (Objects.equals(orderButton, "orderButtonTop")) {
-            clickButton(cookieButton);
-        }
         clickButton(orderButton.equals("orderButtonTop") ? orderButtonTop : orderButtonMiddle);
     }
 }

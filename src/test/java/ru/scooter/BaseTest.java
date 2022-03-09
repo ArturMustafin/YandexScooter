@@ -11,9 +11,11 @@ public abstract class BaseTest {
 
     @Before
     public void setUp() {
+        //======================================================
         // почему-то не работает мб верстка не правильно сделана
-        Cookie cookie = new Cookie("Cartoshka","true");
+        Cookie cookie = new Cookie("Cartoshka", "true");
         WebDriverRunner.getWebDriver().manage().addCookie(cookie);
+        //======================================================
 
         Configuration.browser = "chrome";
         Configuration.driverManagerEnabled = true;
