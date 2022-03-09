@@ -14,6 +14,8 @@ public class MainPage extends BasePage {
     private final By cookieButton = By.id("rcc-confirm-button");
     private final By orderButtonTop = By.cssSelector("[class='Button_Button__ra12g']");
     private final By orderButtonMiddle = By.cssSelector(".Button_Middle__1CSJM");
+    private final By textCookie = By.xpath(".//div[text()='И здесь куки! В общем, мы их используем.']");
+    private final By buttonCookie = By.xpath(".//button[text()='да все привыкли']");
     private final Map<Integer, String> fieldQuestions = Map.of(
             1, ".//div[1][@class='accordion__item']",
             2, ".//div[2][@class='accordion__item']",
@@ -37,18 +39,32 @@ public class MainPage extends BasePage {
 
     public MainPage(String url) {
         open(url);
+        closeCookiesPopup();
     }
 
+    public void closeCookiesPopup(){
+        if(checkTextExist(textCookie)){
+            clickButton(buttonCookie);
+        }
+    }
     public MainPage clickQuestion(int numberQuestion) {
-        // close Cookie, в некоторых кейсах мешают куки.
-        // Не нравится решение закрывать куки сдесь подскажите как лучше сделать,
-        // так же есть дубль этого кода в следующем ТЕСТЕ для закрытия кук
+        /**
+         *
+
         if (numberQuestion == 1) {
             clickButton(cookieButton);
         }
+         */
         clickButton(fieldQuestions.get(numberQuestion));
         return this;
     }
+
+    public MainPage checkAllElementsOnPagePresent(int numberQuestion){
+        isElementDisplayed(fieldQuestions.get(numberQuestion));
+        return this;
+    }
+
+
 
     public String getTextAnswer(int numberQuestion) {
         return getText(fieldAnswer.get(numberQuestion));

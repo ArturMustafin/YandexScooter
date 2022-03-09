@@ -1,21 +1,16 @@
 package ru.scooter;
 
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import ru.scooter.Page.MainPage;
-import ru.scooter.Page.OrderPage;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.Map;
 
 
-public class MainPageTest extends BaseTest {
+public class CheckFAQTest extends BaseTest {
     private final static String URL_HOME = "https://qa-scooter.praktikum-services.ru/";
-    private static final Map<Integer, String> ANSWER_TO_QUESTION = Map.of(
+    private final static Map<Integer, String> ANSWER_TO_QUESTION = Map.of(
             1, "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
             2, "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
             3, "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.",
@@ -25,46 +20,19 @@ public class MainPageTest extends BaseTest {
             7, "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.",
             8, "Да, обязательно. Всем самокатов! И Москве, и Московской области."
     );
-    private final String dateNow = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime());
-    private final static String UNDERGROUND = "Люблино";
 
-    // Faker генератор случайных данных
-    //=================================
-    // нужно ли сдесь делать константы?
-    private final Faker faker = new Faker(new Locale("ru"));
-    private final String name = faker.name().firstName();
-    private final String surname = faker.name().lastName();
-    private final String address = faker.address().streetAddress();
-    private final String phone = faker.phoneNumber().subscriberNumber(11);
-    //=================================
 
     @ParameterizedTest(name = "{0} - question")
     @ValueSource(ints = {
             1, 2, 3, 4, 5, 6, 7, 8
     })
     public void checkQuestionsAboutImportantTest(int numberQuestion) {
-        // паттерн Chain of invocations, использовать методы класса MainPage через "."
         MainPage mainPage = new MainPage(URL_HOME)
+                // добавил еще метод проверки перед нажатием что эл. существует
+                .checkAllElementsOnPagePresent(numberQuestion)
                 .clickQuestion(numberQuestion);
 
         Assertions.assertTrue(mainPage.getTextAnswer(numberQuestion)
                 .contains(ANSWER_TO_QUESTION.get(numberQuestion)));
-    }
-
-
-    @ParameterizedTest(name = "Выполнить заказ через - {0}")
-    @ValueSource(strings = {
-            "orderButtonTop",
-            "orderButtonMiddle"
-    })
-    public void checkBuyScooterTest(String orderButton) {
-        new MainPage(URL_HOME)
-                .clickOrder(orderButton);
-
-        OrderPage orderPage = new OrderPage()
-                .makeOrderWithMandatoryField(name, surname, address, phone, UNDERGROUND, dateNow);
-        String statusOrder = orderPage.getTextStatus();
-
-        Assertions.assertEquals("Заказ оформлен", statusOrder);
     }
 }
