@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 
 import java.util.Map;
 
-import static com.codeborne.selenide.Selenide.open;
-
 /**
  * Главная страница сайта "Самокат"
  */
 public class MainPage extends BasePage {
+    public final static String URL_HOME = "https://qa-scooter.praktikum-services.ru/";
+
     private final By orderButtonTop = By.cssSelector("[class='Button_Button__ra12g']");
     private final By orderButtonMiddle = By.cssSelector(".Button_Middle__1CSJM");
     private final By textCookie = By.xpath(".//div[text()='И здесь куки! В общем, мы их используем.']");
@@ -35,13 +35,12 @@ public class MainPage extends BasePage {
             8, ".//div[@id='accordion__panel-7']/p"
     );
 
-    public MainPage(String url) {
-        open(url);
+    public MainPage() {
         closeCookiesPopup();
     }
 
-    public void closeCookiesPopup(){
-        if(checkTextExist(textCookie)){
+    public void closeCookiesPopup() {
+        if (checkTextExist(textCookie)) {
             clickButton(buttonCookie);
         }
     }
@@ -51,7 +50,7 @@ public class MainPage extends BasePage {
         return this;
     }
 
-    public MainPage checkAllElementsOnPagePresent(int numberQuestion){
+    public MainPage checkAllElementsOnPagePresent(int numberQuestion) {
         isElementDisplayed(fieldQuestions.get(numberQuestion));
         return this;
     }

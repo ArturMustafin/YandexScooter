@@ -11,8 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class OrderVerificationTest extends BaseTest {
-    private final static String URL_HOME = "https://qa-scooter.praktikum-services.ru/";
+import static com.codeborne.selenide.Selenide.open;
+
+public class OrderVerificationTest {
     private final static String DATE_NOW = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime());
     private final static String UNDERGROUND = "Люблино";
     // Faker генератор случайных данных
@@ -29,12 +30,12 @@ public class OrderVerificationTest extends BaseTest {
             "orderButtonMiddle"
     })
     public void checkBuyScooterTest(String orderButton) {
-        new MainPage(URL_HOME)
+        open(MainPage.URL_HOME, MainPage.class)
                 .clickOrder(orderButton);
 
-        OrderPage orderPage = new OrderPage()
-                .makeOrderWithMandatoryField(NAME, SURNAME, ADDRESS, PHONE, UNDERGROUND, DATE_NOW);
-        String statusOrder = orderPage.getTextStatus();
+        String statusOrder = new OrderPage()
+                .makeOrderWithMandatoryField(NAME, SURNAME, ADDRESS, PHONE, UNDERGROUND, DATE_NOW)
+                .getTextStatus();
 
         Assertions.assertEquals("Заказ оформлен", statusOrder);
     }

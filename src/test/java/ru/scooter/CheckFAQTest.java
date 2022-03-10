@@ -7,9 +7,10 @@ import ru.scooter.Page.MainPage;
 
 import java.util.Map;
 
+import static com.codeborne.selenide.Selenide.open;
 
-public class CheckFAQTest extends BaseTest {
-    private final static String URL_HOME = "https://qa-scooter.praktikum-services.ru/";
+
+public class CheckFAQTest {
     private final static Map<Integer, String> ANSWER_TO_QUESTION = Map.of(
             1, "Сутки — 400 рублей. Оплата курьеру — наличными или картой.",
             2, "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.",
@@ -27,12 +28,12 @@ public class CheckFAQTest extends BaseTest {
             1, 2, 3, 4, 5, 6, 7, 8
     })
     public void checkQuestionsAboutImportantTest(int numberQuestion) {
-        MainPage mainPage = new MainPage(URL_HOME)
-                // Добавил еще метод проверки перед нажатием, что эл. Существует
+        String answerUI = open(MainPage.URL_HOME, MainPage.class)
                 .checkAllElementsOnPagePresent(numberQuestion)
-                .clickQuestion(numberQuestion);
+                .clickQuestion(numberQuestion)
+                .getTextAnswer(numberQuestion);
 
-        Assertions.assertTrue(mainPage.getTextAnswer(numberQuestion)
+        Assertions.assertTrue(answerUI
                 .contains(ANSWER_TO_QUESTION.get(numberQuestion)));
     }
 }
