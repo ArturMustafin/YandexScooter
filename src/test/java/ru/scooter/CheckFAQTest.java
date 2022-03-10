@@ -28,7 +28,7 @@ public class CheckFAQTest extends BaseTest {
     })
     public void checkQuestionsAboutImportantTest(int numberQuestion) {
         MainPage mainPage = new MainPage(URL_HOME)
-                // добавил еще метод проверки перед нажатием что эл. существует
+                // Добавил еще метод проверки перед нажатием, что эл. Существует
                 .checkAllElementsOnPagePresent(numberQuestion)
                 .clickQuestion(numberQuestion);
 

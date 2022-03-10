@@ -3,7 +3,6 @@ package ru.scooter.Page;
 import org.openqa.selenium.By;
 
 import java.util.Map;
-import java.util.Objects;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -11,7 +10,6 @@ import static com.codeborne.selenide.Selenide.open;
  * Главная страница сайта "Самокат"
  */
 public class MainPage extends BasePage {
-    private final By cookieButton = By.id("rcc-confirm-button");
     private final By orderButtonTop = By.cssSelector("[class='Button_Button__ra12g']");
     private final By orderButtonMiddle = By.cssSelector(".Button_Middle__1CSJM");
     private final By textCookie = By.xpath(".//div[text()='И здесь куки! В общем, мы их используем.']");
