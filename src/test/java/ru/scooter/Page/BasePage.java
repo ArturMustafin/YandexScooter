@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static org.junit.Assert.assertTrue;
 
-public abstract class BasePage {
+public class BasePage {
 
     protected Boolean checkTextExist(By element) {
         return $(element).exists();
