@@ -1,4 +1,4 @@
-# Тестовое задание, YandexScooter
+# Тестовое задание UI(selenide), YandexScooter
 ____
 
 ## Technical stack
