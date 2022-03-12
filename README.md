@@ -5,3 +5,7 @@ ____
 - Java 11
 - junit
 - selenide
+
+
+##Parallel execution
+parallelism = 4
