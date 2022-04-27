@@ -22,7 +22,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
@@ -33,7 +32,6 @@
             <artifactId>javafaker</artifactId>
             <version>${javafaker.version}</version>
         </dependency>
-
         <!--ТЕСТ РАННЕР-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

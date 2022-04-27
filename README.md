@@ -1,11 +1,39 @@
 # Тестовое задание UI(selenide), YandexScooter
 ____
 
-## Technical stack
+
+## Сводка
+- [Скачивание и запуск проекта](#Скачивание-и-запуск-проекта)
+- [Информация о проекте](#Информация-о-проекте)
+- [Автор](#Автор)
+____
+
+
+## Скачивание и запуск проекта
+<a name="Скачивание-и-запуск-проекта"></a>
+Возможно скачать архив или клонировать проект при наличии git.
+[Ссылка на скачивание архива](https://github.com/ArturMustafin/YandexScooter/archive/master.zip)
+Команда для клонирования проекта:
+```
+$ git https://github.com/ArturMustafin/YandexScooter.git
+```
+Для запуска тестового набора необходимо в командной строке перейти в директорию проекта и выполнить команду:
+```
+mvn clean test 
+```
+_**В приложение есть баг**_
+____
+
+
+## Информация о проекте
 - Java 11
-- junit
+- Maven
+- junit 5
 - selenide
 
+###### Parallel execution : parallelism = 4
+____
 
-##Parallel execution
-parallelism = 4
+## Автор
+- **Артур Мустафин** - <artur5mustafin@gmail.com>, <artur90mustafin@mail.ru>
+

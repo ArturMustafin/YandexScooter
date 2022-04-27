@@ -16,7 +16,6 @@ import static com.codeborne.selenide.Selenide.open;
 public class OrderVerificationTest {
     private final static String DATE_NOW = new SimpleDateFormat("yyyy.MM.dd").format(Calendar.getInstance().getTime());
     private final static String UNDERGROUND = "Люблино";
-    // Faker генератор случайных данных
     private final static Faker faker = new Faker(new Locale("ru"));
     private final static String NAME = faker.name().firstName();
     private final static String SURNAME = faker.name().lastName();
